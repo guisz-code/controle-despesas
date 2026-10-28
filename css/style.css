@@ -1,0 +1,161 @@
+/* Faz o tamanho dos elementos incluir bordas e preenchimentos */
+* {
+    box-sizing: border-box;
+}
+
+/* Estiliza o título principal */
+header h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 2px;
+}
+
+/* Estilos gerais da página */
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    margin: 0;
+    color: #222;
+}
+
+/* Personaliza o cabeçalho */
+header {
+    background: #26303B;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Organiza o conteúdo principal */
+main {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 0 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Organiza os dados do painel superior */
+#painel {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background: white;
+    padding: 16px;
+    border-radius: 8px;
+    border-left: 6px solid #9A694E;
+}
+
+/* Estilo dos dois blocos principais */
+#formulario,
+#listagem {
+    background: white;
+    padding: 16px;
+    border-radius: 8px;
+    flex: 1;
+    min-width: 280px;
+}
+
+/* Diferencia cada bloco pela borda superior */
+#formulario {
+    border-top: 5px solid #9A694E;
+}
+
+#listagem {
+    border-top: 5px solid #EBEBDD;
+}
+
+/* Deixa os nomes dos campos em destaque */
+label {
+    display: block;
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+/* Estiliza os campos de entrada e as caixas de seleção */
+input,
+select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+/* Define a aparência das mensagens de erro */
+#erro {
+    color: red;
+    min-height: 20px;
+}
+
+/* Estilo padrão dos botões */
+button {
+    background: #9A694E;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Muda a cor do botão quando o mouse passa por cima */
+button:hover {
+    background: #7d604d;
+}
+
+/* Remove os marcadores padrão da lista */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* Organiza as informações de cada despesa */
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-top: 8px;
+    background: #f8fafc;
+    border-left: 6px solid gray;
+    border-radius: 4px;
+}
+
+/* Cada categoria recebe uma cor diferente na borda */
+.cat-alimentação {
+    border-left-color: orange;
+}
+
+.cat-transporte {
+    border-left-color: blue;
+}
+
+.cat-lazer {
+    border-left-color: purple;
+}
+
+.cat-outros {
+    border-left-color: gray;
+}
+
+/* Deixa o botão de excluir vermelho */
+.btn-excluir {
+    background: #dc2626;
+    padding: 6px 10px;
+}
+
+/* Escurece o botão de excluir ao passar o mouse */
+.btn-excluir:hover {
+    background: #991b1b;
+}
+
+/* Ajusta o painel para telas menores, como celulares */
+@media (max-width: 600px) {
+    #painel {
+        flex-direction: column;
+        gap: 8px;
+    }
+}

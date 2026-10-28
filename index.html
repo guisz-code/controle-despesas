@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Define os caracteres e adapta a página para celular -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Importa o arquivo de estilos CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Importa a fonte do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&display=swap" rel="stylesheet">
+
+    <title>Controle de Despesas</title>
+</head>
+
+<body>
+
+    <!-- Cabeçalho com o nome do sistema -->
+    <header>
+        <h1>Controle de Despesas</h1>
+    </header>
+
+    <main>
+
+        <!-- Mostra o total e a quantidade de despesas -->
+        <section id="painel">
+            <p>Total: <strong id="total">R$ 0,00</strong></p>
+            <p>Despesas cadastradas: <strong id="contador">0</strong></p>
+        </section>
+
+        <!-- Formulário para cadastrar uma nova despesa -->
+        <section id="formulario">
+            <h2>Nova despesa</h2>
+
+            <form id="form-despesa">
+
+                <!-- Campo para informar o nome da despesa -->
+                <label for="descricao">Descrição</label>
+                <input type="text" id="descricao">
+
+                <!-- Campo para informar o valor -->
+                <label for="valor">Valor</label>
+                <input type="number" id="valor" step="0.01">
+
+                <!-- Escolhe a categoria da despesa -->
+                <label for="categoria">Categoria</label>
+                <select id="categoria">
+                    <option value="Alimentação">Alimentação</option>
+                    <option value="Transporte">Transporte</option>
+                    <option value="Lazer">Lazer</option>
+                    <option value="Outros">Outros</option>
+                </select>
+
+                <!-- Local onde podem aparecer mensagens de erro -->
+                <p id="erro"></p>
+
+                <!-- Botão que envia os dados do formulário -->
+                <button type="submit">Cadastrar</button>
+            </form>
+        </section>
+
+        <!-- Área onde as despesas cadastradas aparecem -->
+        <section id="listagem">
+            <h2>Despesas</h2>
+
+            <!-- Permite escolher uma categoria para filtrar -->
+            <label for="filtro">Filtrar por categoria</label>
+            <select id="filtro">
+                <option value="Todas">Todas</option>
+                <option value="Alimentação">Alimentação</option>
+                <option value="Transporte">Transporte</option>
+                <option value="Lazer">Lazer</option>
+                <option value="Outros">Outros</option>
+            </select>
+
+            <!-- A lista é preenchida pelo JavaScript -->
+            <ul id="lista-despesas"></ul>
+        </section>
+
+    </main>
+
+    <!-- Conecta o arquivo JavaScript com a página -->
+    <script src="js/script.js"></script>
+</body>
+</html>
