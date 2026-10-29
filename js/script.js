@@ -1,21 +1,22 @@
 // Array que guarda as despesas cadastradas
 let despesas = [];
 
-// Identificador usado para cada nova despesa
+// Número usado para identificar cada despesa
 let proximoId = 1;
 
-// Pega os elementos do HTML que serão usados no código
+// Pega os elementos do HTML que vamos usar no código
 const form = document.getElementById("form-despesa");
 const inputDescricao = document.getElementById("descricao");
 const inputValor = document.getElementById("valor");
 const selectCategoria = document.getElementById("categoria");
 const lista = document.getElementById("lista-despesas");
 const msgErro = document.getElementById("erro");
+const selectFiltro = document.getElementById("filtro");
 
-// Função responsável por adicionar uma despesa ao array
+// Função que adiciona uma nova despesa
 function adicionarDespesa(descricao, valor, categoria) {
 
-    // Cria um objeto com os dados da despesa
+    // Cria um objeto com as informações da despesa
     const despesa = {
         id: proximoId++,
         descricao: descricao,
@@ -23,23 +24,34 @@ function adicionarDespesa(descricao, valor, categoria) {
         categoria: categoria
     };
 
-    // Guarda a despesa no array
+    // Adiciona a despesa na lista
     despesas.push(despesa);
 }
 
-// Função que atualiza a lista exibida na página
+// Função que mostra as despesas na tela
 function renderizar() {
 
-    // Limpa a lista antes de mostrar os dados novamente
+    // Limpa a lista para atualizar as informações
     lista.innerHTML = "";
 
-    // Percorre todas as despesas cadastradas
-    despesas.forEach(function(d) {
+    // Pega a categoria escolhida no filtro
+    const categoriaSelecionada = selectFiltro.value;
 
-        // Cria um item para a lista
+    // Se escolher "Todas", mostra todas as despesas
+    // Caso contrário, mostra apenas a categoria escolhida
+    const despesasFiltradas = categoriaSelecionada === "Todas"
+        ? despesas
+        : despesas.filter(function(d) {
+            return d.categoria === categoriaSelecionada;
+        });
+
+    // Percorre as despesas que passaram pelo filtro
+    despesasFiltradas.forEach(function(d) {
+
+        // Cria um novo item para mostrar a despesa
         const li = document.createElement("li");
 
-        // Monta a classe CSS usando a categoria
+        // Define a classe CSS de acordo com a categoria
         const classe = "cat-" + d.categoria.toLowerCase();
         li.classList.add(classe);
 
@@ -50,51 +62,58 @@ function renderizar() {
             <button class="btn-excluir" data-id="${d.id}">Excluir</button>
         `;
 
-        // Adiciona o item criado dentro da lista
+        // Coloca a despesa dentro da lista do HTML
         lista.appendChild(li);
     });
 
-    // Atualiza a quantidade de despesas cadastradas
+    // Atualiza a quantidade total de despesas cadastradas
     const contador = document.getElementById("contador");
     contador.textContent = despesas.length;
 }
 
-// Detecta quando o formulário é enviado
+// Detecta quando o usuário envia o formulário
 form.addEventListener("submit", function(evento) {
 
-    // Impede a página de recarregar ao cadastrar
+    // Impede a página de recarregar
     evento.preventDefault();
 
-    // Pega os valores digitados pelo usuário
+    // Pega os dados digitados no formulário
     const descricao = inputDescricao.value;
     const valor = parseFloat(inputValor.value);
     const categoria = selectCategoria.value;
 
-    // Cadastra a despesa com os dados informados
+    // Adiciona a despesa usando os dados informados
     adicionarDespesa(descricao, valor, categoria);
 
-    // Limpa os campos do formulário
+    // Limpa os campos depois do cadastro
     form.reset();
 
-    // Atualiza a lista na tela
+    // Atualiza a lista para mostrar a nova despesa
     renderizar();
 });
 
-// Detecta cliques dentro da lista de despesas
+// Detecta quando o usuário clica em algum botão da lista
 lista.addEventListener("click", function(evento) {
 
     // Verifica se o botão clicado é o de excluir
     if (evento.target.classList.contains("btn-excluir")) {
 
-        // Pega o ID da despesa que será excluída
+        // Pega o ID da despesa selecionada
         const id = Number(evento.target.dataset.id);
 
-        // Cria uma lista sem a despesa selecionada
+        // Remove da lista a despesa que tem esse ID
         despesas = despesas.filter(function(d) {
             return d.id !== id;
         });
 
-        // Atualiza a lista depois da exclusão
+        // Atualiza a tela depois de excluir
         renderizar();
     }
+});
+
+// Detecta quando o usuário muda a categoria do filtro
+selectFiltro.addEventListener("change", function() {
+
+    // Atualiza a lista de acordo com o filtro escolhido
+    renderizar();
 });
